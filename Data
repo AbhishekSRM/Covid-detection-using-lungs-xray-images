@@ -1,0 +1,44 @@
+Data Description
+In this  we are identifying and localizing COVID-19 abnormalities on chest radiographs. This is an object detection and classification problem.
+
+For each test image, you will be predicting a bounding box and class for all findings. If you predict that there are no findings, you should create a prediction of "none 1 0 0 1 1" ("none" is the class ID for no finding, and this provides a one-pixel bounding box with a confidence of 1.0).
+
+Further, for each test study, you should make a determination within the following labels:
+
+'Negative for Pneumonia' 'Typical Appearance' 'Indeterminate Appearance' 'Atypical Appearance'
+
+To make a prediction of one of the above labels, create a prediction string similar to the "none" class above: e.g. atypical 1 0 0 1 1
+
+Please see the Evaluation page for more details about formatting predictions.
+
+The images are in DICOM format, which means they contain additional data that might be useful for visualizing and classifying.
+
+Dataset information
+The train dataset comprises 6,334 chest scans in DICOM format, which were de-identified to protect patient privacy. All images were labeled by a panel of experienced radiologists for the presence of opacities as well as overall appearance.
+
+Note that all images are stored in paths with the form study/series/image. The study ID here relates directly to the study-level predictions, and the image ID is the ID used for image-level predictions.
+
+The hidden test dataset is of roughly the same scale as the training dataset.
+
+Files
+train_study_level.csv - the train study-level metadata, with one row for each study, including correct labels.
+train_image_level.csv - the train image-level metadata, with one row for each image, including both correct labels and any bounding boxes in a dictionary format. Some images in both test and train have multiple bounding boxes.
+sample_submission.csv - a sample submission file containing all image- and study-level IDs.
+Columns
+train_study_level.csv
+
+id - unique study identifier
+Negative for Pneumonia - 1 if the study is negative for pneumonia, 0 otherwise
+Typical Appearance - 1 if the study has this appearance, 0 otherwise
+Indeterminate Appearance  - 1 if the study has this appearance, 0 otherwise
+Atypical Appearance  - 1 if the study has this appearance, 0 otherwise
+train_image_level.csv
+
+id - unique image identifier
+boxes - bounding boxes in easily-readable dictionary format
+label - the correct prediction label for the provided bounding boxes
+Citation
+The BIMCV-COVID19 Data used by this challenge were originally published by the Medical Imaging Databank of the Valencia Region (BIMCV) in cooperation with The Foundation for the Promotion of Health and Biomedical Research of Valencia Region (FISABIO), and the Regional Ministry of Innovation, Universities, Science and Digital Society (Generalitat Valenciana), however the images were completely re-annotated using different annotation types. Users of this data must abide by the BIMCV-COVID19 Dataset research Use Agreement. Paper Reference: BIMCV COVID-19+: a large annotated dataset of RX and CT images from COVID-19 patients
+
+The MIDRC-RICORD Data used by this challenge were originally published by The Cancer Imaging Archive. The images were re-annotated for this challenge using a different annotation schema. Users of this data must abide by the TCIA Data Usage Policy and the Creative Commons Attribution-NonCommercial 4.0 International License under which it has been published. Attribution should include references to citations listed on the TCIA citation information page (page bottom). Paper Reference: The RSNA International COVID-19 Open Radiology Database (RICORD)
+ Link-  https://www.kaggle.com/c/siim-covid19-detection/data
